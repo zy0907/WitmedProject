@@ -1,0 +1,9 @@
+###### 配置开启 Spring Boot Bean id Override 机制
+spring:
+  main:
+    allow-bean-definition-overriding: true
+###### 配置 Eureka Client 连接 Server 信息
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
