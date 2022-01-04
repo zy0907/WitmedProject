@@ -39,12 +39,12 @@
     </dependency>
     <!-- 配置 Hutool All 依赖 [END] -->
 
-    <!-- 配置 SpringFox Boot Starter 依赖 [BEGIN] -->
+    <!-- 配置 Project Lombok 依赖 [BEGIN] -->
     <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
-      <version>${springfox-boot-starter.version}</version>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
     </dependency>
-    <!-- 配置 SpringFox Boot Starter 依赖 [END] -->
+    <!-- 配置 Project Lombok 依赖 [END] -->
   </dependencies>
 </project>
