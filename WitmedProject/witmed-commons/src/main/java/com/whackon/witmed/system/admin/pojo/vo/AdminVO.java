@@ -1,8 +1,6 @@
 package com.whackon.witmed.system.admin.pojo.vo;
 
 import com.whackon.witmed.base.pojo.vo.BaseVO;
-import com.whackon.witmed.system.dictionary.pojo.vo.IdentityVO;
-import com.whackon.witmed.system.hospital.pojo.vo.DepartmentVO;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,9 +21,9 @@ public class AdminVO extends BaseVO {
 	private String name;             //人员姓名
 	private String cellphone;        //联系电话
 	private String password;         //登陆密码
-	private RoleVO roleVO;               //人员角色
-	private IdentityVO identityVO;       //人员身份
-	private DepartmentVO departmentVO;   //所属部门
+	private String roleVO;               //人员角色
+	private String identityVO;       //人员身份
+	private String departmentVO;   //所属部门
 	private String technicalPos;     //服务者专业技术职务（职称）
 	private String education;        //服务者学历
 	private String professionalName; //服务者所学专业

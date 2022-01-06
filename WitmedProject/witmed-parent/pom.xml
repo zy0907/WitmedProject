@@ -24,12 +24,13 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <hutool-all.version>5.7.18</hutool-all.version>
-    <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
     <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
-    <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
+    <mybatis-plus-boot-starter.version>3.5.0</mybatis-plus-boot-starter.version>
     <druid-spring-boot-starter.version>1.2.8</druid-spring-boot-starter.version>
     <pagehelper-spring-boot-starter.version>1.4.1</pagehelper-spring-boot-starter.version>
     <mapstruct.version>1.4.2.Final</mapstruct.version>
+    <lombok.versioin>1.18.22</lombok.versioin>
+    <java-jwt.version>3.18.2</java-jwt.version>
   </properties>
 
   <dependencies>
@@ -95,6 +96,27 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <!--
+			  此时在系统中存在 MapStruct 和 Lombok 两个功能，
+			  其中 MapStruct 会编译生成转换代码，会调用到 POJO 的 getter 和 setter 方法，
+			  而 Lombok 则可以省略 getter 和 setter 方法，在编译时自动生成，
+			  就会导致 MapStruct 编译时找不到 getter 和 setter 方法，
+			  需要将两个进行结合
+		  -->
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+              </path>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
