@@ -4,82 +4,97 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.security.Key;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <b>基础信息功能 - Token 工具类</b>
- * <p>
- *     为了能够实现 Token 机制，选择借助于 JWT（JSON Web Token） 来实现，
- *     通过 JWT 能够实现一个唯一经过加密的 Token
- * </p>
+ * <b>项目基础框架 - 系统 Token 工具类</b>
  *
- * @author Arthur
- * @date 2022/1/6
+ * @author zyuan
+ * @date 2022/1/18
  * @version 1.0.0
  * @since 1.0.0
  */
 public class TokenUtil {
-	// 设定系统加密算法
-	private static Algorithm algorithm = Algorithm.HMAC256(BaseConstants.SECRET_KEY);
+	private static Logger logger = LoggerFactory.getLogger(TokenUtil.class);
+	// 设置加密算法
+	private static Algorithm algorithm = Algorithm.HMAC256(BaseConstants.BASE_SECRET_KEY);
+	// 设置载荷对应的 key
+	private static final String CLAIM_KEY = "CLAIM_KEY";
+	// 设置 Token 消息头信息
+	private static Map<String, Object> header = new HashMap<String, Object>();
 
-	/**
-	 * <b>根据用户所给定的信息生成 Token</b>
-	 * @param claimMap
-	 * @param expireSec
-	 * @return
-	 */
-	public static String createToken(Map<String, String> claimMap, Long expireSec) {
-		// 创建 JWT Token 生成器
-		JWTCreator.Builder builder = JWT.create();
-		// 创建 Map 集合，用于设定生成 Token 的头部信息
-		Map<String, Object> headerMap = new HashMap<String, Object>();
-		// 设定 Token 的生成方式是使用了 jwt
-		headerMap.put("typ", "jwt");
-		// 设定整体 Token 的加密算法
-		headerMap.put("alg", "HS256");
-		// 设定头部信息
-		builder.withHeader(headerMap);
-		// 设定 Token 的有效载荷部分
-		// 取出所给定的 Map 集合中的每一个 key-value 组合，逐一的添加到有效载荷中
-		// 循环 Map 集合
-//		Set<String> keySet = claimMap.keySet();
-//		for (String key : keySet) {
-//			Object value = claimMap.get(key);
-//			builder.withClaim(key, String.valueOf(value));
-//		}
-		// 在 JDK 8 的时候提供了 foreach() 可能快速的实现对 Map 集合的循环
-		claimMap.forEach((key, value) -> {
-			builder.withClaim(key, value);
-		});
-		// 设置 Token 的有效时间，需要获得 Token 到期的时间 Date
-		builder.withExpiresAt(new Date(System.currentTimeMillis() + expireSec * 1000));
-		return builder.sign(algorithm);
+	static {
+		// 设置 Token 消息头信息
+		header.put("typ", "jwt");
+		header.put("alg", "HS256");
 	}
 
 	/**
-	 * <b>校验 Token 信息，获得该 Token 中的有效载荷数据</b>
-	 * @param token
+	 * <b>创建 Token 信息</b>
+	 * @param claimObj
+	 * @param expireSec
 	 * @return
 	 */
-	public static Map<String, String> verifyToken(String token) {
-		// 校验此时所给定的 Token 是符合相关形式的
+	public static String createToken(Object claimObj, Long expireSec) {
+		// 创建 JWT Token 信息对象
+		JWTCreator.Builder builder = JWT.create();
+		// 设置 JWT Token 消息头
+		builder.withHeader(header);
+		// 将需要添加的载荷变为 JSON 格式数据
+		String claimJSON = "";
+		try {
+			// 创建 JsonMapper 对象
+			JsonMapper jsonMapper = new JsonMapper();
+			// 将载荷数据变为 JSON 格式数据
+			claimJSON = jsonMapper.writeValueAsString(claimObj);
+			// 将转换后的信息加载到载荷中
+			builder.withClaim(CLAIM_KEY, claimJSON);
+			// 计算过期日期
+			Date expireDate = new Date(new Date().getTime() + expireSec * 1000);
+			// 设置过期日期
+			builder.withExpiresAt(expireDate);
+			// 对 Token 信息进行签名生成 Token
+			return builder.sign(algorithm);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage() + " : " + new Date(), e);
+		}
+		return "";
+	}
+
+	/**
+	 * <b>根据所给定的 Token 进行校验并提取数据</b>
+	 * @param token
+	 * @param objClass
+	 * @return
+	 */
+	public static Object verifyToken(String token, Class objClass) {
 		if (token != null && !"".equals(token.trim())) {
-			// 此时 Token 格式有效
-			// 获得 Token 校验对象 JWTVerifier
-			JWTVerifier verifier = JWT.require(algorithm).build();
-			// 对于该 Token 进行校验
-			DecodedJWT decodedJWT = verifier.verify(token);
-			// 如果能够获得 DecodedJWT 则说明通过秘钥能够将加密 Token 进行解密
-			// 提取绑定在 Token 中的有效载荷信息
-			Map<String, String> resultMap = new HashMap<String, String>();
-			decodedJWT.getClaims().forEach((key, value) -> {
-				resultMap.put(key, value.asString());
-			});
-			return resultMap;
+			// 根据加密算法获得 Token 校验对象
+			JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+			// 对 Token 进行校验
+			try {
+				// 校验 Token，获得 DecodedJWT 对象
+				DecodedJWT decodedJWT = jwtVerifier.verify(token);
+				if (decodedJWT != null) {
+					// Token 校验成功，提取 Token 中的数据
+					String claimJSON = decodedJWT.getClaim(CLAIM_KEY).asString();
+					// 根据用户所给定的数据类型进行类型转换
+					JsonMapper jsonMapper = new JsonMapper();
+					// 将 JSON 格式的数据变为对象
+					return jsonMapper.readValue(claimJSON, objClass);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error(e.getMessage() + " : " + new Date(), e);
+			}
 		}
 		return null;
 	}

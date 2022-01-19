@@ -8,45 +8,39 @@
   <groupId>com.whackon.witmed</groupId>
   <artifactId>witmed-parent</artifactId>
   <version>1.0.0</version>
-  <!-- 设置项目的打包方式为 pom -->
+  <!-- 配置项目打包方式：pom -->
   <packaging>pom</packaging>
 
-  <!-- 配置使用 Spring Boot Starter Parent 作为项目父级依赖 [BEGIN] -->
+  <!-- 配置项目父级依赖：Spring Boot Starter Parent [BEGIN] -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.6.2</version>
   </parent>
-  <!-- 配置使用 Spring Boot Starter Parent 作为项目父级依赖 [END] -->
+  <!-- 配置项目父级依赖：Spring Boot Starter Parent [END] -->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <hutool-all.version>5.7.18</hutool-all.version>
-    <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
-    <mybatis-plus-boot-starter.version>3.5.0</mybatis-plus-boot-starter.version>
+    <spring-cloud.version>2021.0.0</spring-cloud.version>
     <druid-spring-boot-starter.version>1.2.8</druid-spring-boot-starter.version>
+    <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
+    <mybatis-plus-boot-starter.version>3.5.0</mybatis-plus-boot-starter.version>
     <pagehelper-spring-boot-starter.version>1.4.1</pagehelper-spring-boot-starter.version>
+    <lombok.version>1.18.22</lombok.version>
     <mapstruct.version>1.4.2.Final</mapstruct.version>
-    <lombok.versioin>1.18.22</lombok.versioin>
-    <java-jwt.version>3.18.2</java-jwt.version>
+    <hutool-all.version>5.7.19</hutool-all.version>
+    <java-jwt.version>3.18.3</java-jwt.version>
   </properties>
 
   <dependencies>
-    <!-- 配置 Spring Boot Starter Web 依赖 [BEGIN] -->
+    <!-- 配置依赖：Spring Boot Starter Web [BEGIN] -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <!-- 配置 Spring Boot Starter Web 依赖 [END] -->
-
-    <!-- 配置 Spring Boot Devtools 依赖 [BEGIN] -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
-    <!-- 配置 Spring Boot Devtools 依赖 [END] -->
+    <!-- 配置依赖：Spring Boot Starter Web [END] -->
 
     <dependency>
       <groupId>junit</groupId>
@@ -57,22 +51,22 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- 配置 Spring Cloud Dependencies 依赖 [BEGIN] -->
+      <!-- 配置依赖：Spring Cloud Dependencies [BEGIN] -->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>2021.0.0</version>
+        <version>${spring-cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- 配置 Spring Cloud Dependencies 依赖 [END] -->
+      <!-- 配置依赖：Spring Cloud Dependencies [END] -->
     </dependencies>
   </dependencyManagement>
 
   <build>
     <pluginManagement>
       <plugins>
-        <!-- 配置 Spring Boot Maven Plugin 依赖 [BEGIN] -->
+        <!-- 配置插件依赖：Spring Boot Maven Plugin [BEGIN] -->
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
@@ -84,7 +78,7 @@
             </execution>
           </executions>
         </plugin>
-        <!-- 配置 Spring Boot Maven Plugin 依赖 [END] -->
+        <!-- 配置插件依赖：Spring Boot Maven Plugin [END] -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
@@ -97,23 +91,26 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <!--
-			  此时在系统中存在 MapStruct 和 Lombok 两个功能，
-			  其中 MapStruct 会编译生成转换代码，会调用到 POJO 的 getter 和 setter 方法，
-			  而 Lombok 则可以省略 getter 和 setter 方法，在编译时自动生成，
-			  就会导致 MapStruct 编译时找不到 getter 和 setter 方法，
-			  需要将两个进行结合
+			  由于 Lombok 和 MapStruct 都是在编译时期生成相应功能代码，
+			  但是 MapStruct 在编译生成时，需要用到 Lombok 所提供的 getter 和 setter 方法，
+			  因此需要设定 Lombok 和 MapStruct 的编译顺序：
+			  首先编译 Lombok，然后是 MapStruct
 		  -->
           <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
             <annotationProcessorPaths>
-              <path>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct.version}</version>
-              </path>
+              <!-- 首先编译 Lombok -->
               <path>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+              </path>
+              <!-- 然后编译 MapStruct -->
+              <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
               </path>
             </annotationProcessorPaths>
           </configuration>

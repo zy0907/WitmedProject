@@ -3,38 +3,26 @@ package com.whackon.witmed.system.admin.pojo.vo;
 import com.whackon.witmed.base.pojo.vo.BaseVO;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
- * <b>系统功能 - 系统用户视图信息</b>
+ * <b>智慧医疗信息平台 - 系统功能 - 系统用户视图信息</b>
  *
- * @author Arthur
- * @date 2022/1/4
+ * @author zyuan
+ * @date 2022/1/19
  * @version 1.0.0
  * @since 1.0.0
  */
 @Data
 public class AdminVO extends BaseVO {
-	private static final long serialVersionUID = -1690145997100587386L;
-	private String id;               //主键
-	private String no;               //人员工号
-	private String name;             //人员姓名
-	private String cellphone;        //联系电话
-	private String password;         //登陆密码
-	private String roleVO;               //人员角色
-	private String identityVO;       //人员身份
-	private String departmentVO;   //所属部门
-	private String technicalPos;     //服务者专业技术职务（职称）
-	private String education;        //服务者学历
-	private String professionalName; //服务者所学专业
-	private String technicalPosRank; //服务者专业技术职务（职称）等级
-
-
-
-
-
-
-
-
-
+	private static final long serialVersionUID = 811957010974699686L;
+	private String id;                      // 主键
+	private String no;                      // 工号
+	private String name;                    // 姓名
+	private String cellphone;               // 手机号码
+	private String password;                // 登录密码
+	private RoleVO roleVO;                  // 角色
+	private String identity;                // 身份
+	private String department;              // 所在部门
+	private String techPostTitle;           // 服务者专业技术职务
+	private String education;               // 学历
+	private String techPostRank;            // 服务者专业技术职务等级
 }

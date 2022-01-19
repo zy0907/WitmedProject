@@ -1,22 +1,35 @@
 package com.whackon.witmed.base.pojo.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * <b>基础信息功能 - 系统分页视图信息</b>
+ * <b>项目基础框架 - 系统分页视图信息</b>
+ * <p>
+ *     系统基础视图信息设置了如下属性：
+ *     1、pageNum：当前页码<br/>
+ *     2、pageSize：每页显示数量<br/>
+ *     3、list：分页列表<br/>
+ *     4、totalCount：总数量<br/>
+ *     5、totalPage：总页数<br/>
+ *     <p>所有项目功能分页信息都必须以本系统分页视图信息返回</p>
+ * </p>
  *
  * @author zyuan
- * @date 2021/12/29
- * @since
+ * @date 2022/1/18
+ * @version 1.0.0
+ * @since 1.0.0
  */
+@Data
 public class PageVO<E extends BaseVO> implements Serializable {
-	private static final long serialVersionUID = -455093949216052594L;
+	private static final long serialVersionUID = -3458922961994208370L;
 	private Integer pageNum;                        // 当前页码
 	private Integer pageSize;                       // 每页显示数量
 	private List<E> list;                           // 分页列表
-	private Long totalCount;                        // 总条数
-	private Integer totalPage;                      // 总页数
+	private Long totalCount;                        // 总数量
+	private Long totalPage;                         // 总页数
 
 	public PageVO() {}
 
@@ -28,49 +41,7 @@ public class PageVO<E extends BaseVO> implements Serializable {
 		}
 
 		if (pageSize != null && pageSize > 0) {
-			this.pageSize = pageSize;
-		} else {
 			this.pageSize = 10;
 		}
-	}
-
-	public Integer getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public List<E> getList() {
-		return list;
-	}
-
-	public void setList(List<E> list) {
-		this.list = list;
-	}
-
-	public Long getTotalCount() {
-		return totalCount;
-	}
-
-	public void setTotalCount(Long totalCount) {
-		this.totalCount = totalCount;
-	}
-
-	public Integer getTotalPage() {
-		return totalPage;
-	}
-
-	public void setTotalPage(Integer totalPage) {
-		this.totalPage = totalPage;
 	}
 }

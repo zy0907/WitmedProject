@@ -1,61 +1,29 @@
 package com.whackon.witmed.base.pojo.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <b>基础视图信息</b>
+ * <b>项目基础框架 - 系统基础视图信息</b>
+ * <p>
+ *     系统基础视图信息设置了如下属性：
+ *     1、status：系统状态（0-禁用，1-启用）<br/>
+ *     2、createdTime：创建时间<br/>
+ *     3、modifiedTime：修改时间<br/>
+ *     <p>所有项目功能视图信息都必须继承于本系统基础视图信息</p>
+ * </p>
  *
  * @author zyuan
- * @date 2021/12/29
+ * @date 2022/1/18
  * @version 1.0.0
  * @since 1.0.0
  */
+@Data
 public class BaseVO implements Serializable {
-	private static final long serialVersionUID = -5145823486061107413L;
+	private static final long serialVersionUID = 5307507834353921384L;
 	private String status;                      // 系统状态：0-禁用，1-启用
-	private String createdBy;                   // 创建人
 	private Date createdTime;                   // 创建时间
-	private String modifiedBy;                  // 修改人
 	private Date modifiedTime;                  // 修改时间
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
-
-	public Date getModifiedTime() {
-		return modifiedTime;
-	}
-
-	public void setModifiedTime(Date modifiedTime) {
-		this.modifiedTime = modifiedTime;
-	}
 }

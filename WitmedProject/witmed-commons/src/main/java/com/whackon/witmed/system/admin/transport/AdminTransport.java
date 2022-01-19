@@ -6,23 +6,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * <b>系统功能 - 系统用户传输层接口</b>
+ * <b>智慧医疗信息平台 - 系统功能 - 系统用户传输层接口</b>
  *
  * @author zyuan
- * @date 2022/1/6
+ * @date 2022/1/19
  * @version 1.0.0
  * @since 1.0.0
  */
 @FeignClient(name = "witmed-system-provider")
-//对应的应用名称 resources 里面配 项目名字 什么就写什么
 public interface AdminTransport {
 	/**
-	 * <b>根据手机号码查询用户信息</b>
+	 * <b>根据手机号码查询系统用户视图信息</b>
 	 * @param cellphone
 	 * @return
 	 * @throws Exception
 	 */
-	@PostMapping("/system/admin/admin/trans/cellphone")
-	//@RequestParam传递参数的注解
+	@PostMapping("/system/admin/admin/trans/login")
 	AdminVO getAdminVOByCellphone(@RequestParam String cellphone) throws Exception;
 }

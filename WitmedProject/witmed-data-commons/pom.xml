@@ -5,79 +5,79 @@
                                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>witmed-data-commons</artifactId>
-  <!-- 设置打包方式为 jar -->
+  <!-- 配置项目打包方式：jar -->
   <packaging>jar</packaging>
 
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [BEGIN] -->
+  <!-- 配置项目父级依赖：Witmed Parent [BEGIN] -->
   <parent>
     <groupId>com.whackon.witmed</groupId>
     <artifactId>witmed-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [END] -->
+  <!-- 配置项目父级依赖：Witmed Parent [END] -->
 
   <dependencies>
-    <!-- 配置 Witmed Commons 依赖 [BEGIN] -->
+    <!-- 配置依赖：Witmed Commons [BEGIN] -->
     <dependency>
       <groupId>com.whackon.witmed</groupId>
       <artifactId>witmed-commons</artifactId>
       <version>${parent.version}</version>
     </dependency>
-    <!-- 配置 Witmed Commons 依赖 [END] -->
+    <!-- 配置依赖：Witmed Commons [END] -->
 
-    <!-- 配置 MySQL Connector/J 依赖 [BEGIN] -->
+    <!-- 配置依赖：MySQL Connector/J [BEGIN] -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
-    <!-- 配置 MySQL Connector/J 依赖 [END] -->
+    <!-- 配置依赖：MySQL Connector/J [END] -->
 
-    <!-- 配置 MyBatis Spring Boot Starter 依赖 [BEGIN] -->
-    <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>${mybatis-spring-boot-starter.version}</version>
-    </dependency>
-    <!-- 配置 MyBatis Spring Boot Starter 依赖 [END] -->
-
-    <!-- 配置 MyBatis Plus 依赖 [BEGIN] -->
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>${mybatis-plus-boot-starter.version}</version>
-    </dependency>
-    <!-- 配置 MyBatis Plus 依赖 [END] -->
-
-    <!-- 配置 Druid Spring Boot Starter 依赖 [BEGIN] -->
+    <!-- 配置依赖：Druid Spring Boot Starter [BEGIN] -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid-spring-boot-starter</artifactId>
       <version>${druid-spring-boot-starter.version}</version>
     </dependency>
-    <!-- 配置 Druid Spring Boot Starter 依赖 [END] -->
+    <!-- 配置依赖：Druid Spring Boot Starter [END] -->
 
-    <!-- 配置 PageHelper Spring Boot Starter 依赖 [BEGIN] -->
+    <!-- 配置依赖：MyBatis Spring Boot Starter [BEGIN] -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>${mybatis-spring-boot-starter.version}</version>
+    </dependency>
+    <!-- 配置依赖：MyBatis Spring Boot Starter [END] -->
+
+    <!-- 配置依赖：MyBatis Plus [BEGIN] -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>${mybatis-plus-boot-starter.version}</version>
+    </dependency>
+    <!-- 配置依赖：MyBatis Plus [END] -->
+
+    <!-- 配置依赖：PageHelper Spring Boot Starter [BEGIN] -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper-spring-boot-starter</artifactId>
       <version>${pagehelper-spring-boot-starter.version}</version>
     </dependency>
-    <!-- 配置 PageHelper Spring Boot Starter 依赖 [END] -->
+    <!-- 配置依赖：PageHelper Spring Boot Starter [END] -->
 
-    <!-- 配置 MapStruct Core 依赖 [BEGIN] -->
+    <!-- 配置依赖：MapStruct Core [BEGIN] -->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
-    <!-- 配置 MapStruct Core 依赖 [END] -->
+    <!-- 配置依赖：MapStruct Core [END] -->
 
-    <!-- 配置 MapStruct Processor 依赖 [BEGIN] -->
+    <!-- 配置依赖：MapStruct Processor [BEGIN] -->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-processor</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
-    <!-- 配置 MapStruct Processor 依赖 [END] -->
+    <!-- 配置依赖：MapStruct Processor [END] -->
   </dependencies>
 </project>

@@ -1,0 +1,49 @@
+#########################################################################
+##########          Witmed Project Data Configuration          ##########
+##########          @author: Arthur                            ##########
+##########          @date 2022/1/18                            ##########
+##########          @version 1.0.0                             ##########
+##########          @since 1.0.0                               ##########
+#########################################################################
+spring:
+  ###### 配置 JDBC 链接信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/witmed_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    ###### 配置所使用的数据库连接池为 Druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    ###### 配置 Druid 信息
+    druid:
+      ###### 配置最小连接数
+      min-idle: 3
+      ###### 配置最大连接数
+      max-active: 15
+      ###### 配置初始连接数
+      initial-size: 5
+      ###### 配置最小存活时间
+      min-evictable-idle-time-millis: 30000
+      ###### 配置最大存活时间
+      max-evictable-idle-time-millis: 60000
+      ###### 配置 Druid 数据监测中心
+      web-stat-filter:
+        ###### 开启 Druid 数据监测中心
+        enabled: true
+        ###### 配置监控中心需要监控的请求
+        url-pattern: /*
+        ###### 配置需要忽略监控的请求
+        exclusions: /druid/*, *.js, *.gif, *.jpg, *.png, *.css, *.ico
+      ###### 配置 Druid 数据监控中心网站信息
+      stat-view-servlet:
+        ###### 开启监控中心网站
+        enabled: true
+        ###### 配置登录监控中心的用户名和密码
+        login-username: druid
+        login-password: root
+        ###### 配置监控中心的访问地址
+        url-pattern: /druid/*
+###### 配置 MyBatis 信息
+mybatis:
+  ###### 配置 MyBatis 映射文件路径
+  mapper-locations: classpath:/mapper/*/*/*.Mapper.xml

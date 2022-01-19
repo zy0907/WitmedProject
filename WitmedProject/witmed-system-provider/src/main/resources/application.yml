@@ -1,5 +1,5 @@
 ##############################################################
-##########          Witmed System Consumer          ##########
+##########          Witmed System Provider          ##########
 ##########          @author: Arthur                 ##########
 ##########          @date 2022/1/18                 ##########
 ##########          @version 1.0.0                  ##########
@@ -7,11 +7,11 @@
 ##############################################################
 ###### 配置项目启动端口号
 server:
-  port: 11111
+  port: 11199
 spring:
   ###### 配置项目应用名
   application:
-    name: witmed-system-consumer
+    name: witmed-system-provider
   ###### 配置项目需要加载的环境
   profiles:
-    active: commons
+    active: data, commons

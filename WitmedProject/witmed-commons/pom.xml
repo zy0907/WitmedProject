@@ -5,75 +5,68 @@
                                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>witmed-commons</artifactId>
-  <!-- 设置打包方式为 jar -->
+  <!-- 配置项目打包方式：jar -->
   <packaging>jar</packaging>
 
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [BEGIN] -->
+  <!-- 配置项目父级依赖：Witmed Parent [BEGIN] -->
   <parent>
     <groupId>com.whackon.witmed</groupId>
     <artifactId>witmed-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [END] -->
+  <!-- 配置项目父级依赖：Witmed Parent [END] -->
 
   <dependencies>
-    <!-- 配置 Spring Cloud Starter Netflix Eureka Client 依赖 [BEGIN] -->
+    <!-- 配置依赖：Spring Cloud Starter Netflix Eureka Client [BEGIN] -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
-    <!-- 配置 Spring Cloud Starter Netflix Eureka Client 依赖 [END] -->
+    <!-- 配置依赖：Spring Cloud Starter Netflix Eureka Client [END] -->
 
-    <!-- 配置 Spring Cloud Starter OpenFeign 依赖 [BEGIN] -->
+    <!-- 配置依赖：Spring Cloud Starter OpenFeign [BEGIN] -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
-    <!-- 配置 Spring Cloud Starter OpenFeign 依赖 [END] -->
+    <!-- 配置依赖：Spring Cloud Starter OpenFeign [END] -->
 
-    <!-- 配置 Hutool All 依赖 [BEGIN] -->
+    <!-- 配置依赖：Spring Boot Starter Data Redis [BEGIN] -->
     <dependency>
-      <groupId>cn.hutool</groupId>
-      <artifactId>hutool-all</artifactId>
-      <version>${hutool-all.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
-    <!-- 配置 Hutool All 依赖 [END] -->
+    <!-- 配置依赖：Spring Boot Starter Data Redis [END] -->
 
-    <!-- 配置 Project Lombok 依赖 [BEGIN] -->
+    <!-- 配置依赖：Spring Boot Starter Validation [BEGIN] -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <!-- 配置依赖：Spring Boot Starter Validation [END] -->
+
+    <!-- 配置依赖：Project Lombok [BEGIN] -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
     </dependency>
-    <!-- 配置 Project Lombok 依赖 [END] -->
+    <!-- 配置依赖：Project Lombok [END] -->
 
-    <!-- 配置 Spring Boot Starter Freemarker 依赖 [BEGIN] -->
+    <!-- 配置依赖：Hutool All [BEGIN] -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-freemarker</artifactId>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>${hutool-all.version}</version>
     </dependency>
-    <!-- 配置 Spring Boot Starter Freemarker 依赖 [END] -->
+    <!-- 配置依赖：Hutool All [END] -->
 
-    <!-- 配置 Spring Boot Starter Validation 依赖 [BEGIN] -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <!-- 配置 Spring Boot Starter Validation 依赖 [END] -->
-
-    <!-- 配置 Java JWT 依赖 [BEGIN] -->
+    <!-- 配置依赖：Java JWT [BEGIN] -->
     <dependency>
       <groupId>com.auth0</groupId>
       <artifactId>java-jwt</artifactId>
       <version>${java-jwt.version}</version>
     </dependency>
-    <!-- 配置 Java JWT 依赖 [END] -->
-
-    <!-- 配置 Spring Boot Starter Data Redis 依赖 [BEGIN] -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-    <!-- 配置 Spring Boot Starter Data Redis 依赖 [END] -->
+    <!-- 配置依赖：Java JWT [END] -->
   </dependencies>
 </project>

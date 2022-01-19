@@ -7,17 +7,16 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * <b>基础信息功能 - 基础常量类</b>
+ * <b>项目基础框架 - 系统常量工具类</b>
  *
- * @author Arthur
- * @date 2021/12/30
+ * @author zyuan
+ * @date 2022/1/18
  * @version 1.0.0
  * @since 1.0.0
  */
 public class BaseConstants {
-	private static Properties props = new Properties();
-	// 创建日志对象
 	private static Logger logger = LoggerFactory.getLogger(BaseConstants.class);
+	private static Properties props = new Properties();
 
 	static {
 		try {
@@ -29,12 +28,12 @@ public class BaseConstants {
 	}
 
 	/**
-	 * <b>加密秘钥信息</b>
+	 * <b>Token 私钥信息</b>
 	 */
-	public static final String SECRET_KEY = props.getProperty("secret.key");
+	public static String BASE_SECRET_KEY = props.getProperty("base.secret.key");
 
 	/**
-	 * <b>用户认证有效时长</b>
+	 * <b>Token 默认有效时长（秒）</b>
 	 */
-	public static final Long EXPIRE_AUTH_SEC = Long.parseLong(props.getProperty("expire.auth.sec"));
+	public static Long BASE_TOKEN_EXPIRE = Long.parseLong(props.getProperty("base.token.expire"));
 }
