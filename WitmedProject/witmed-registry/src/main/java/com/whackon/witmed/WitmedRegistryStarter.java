@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * <b>注册中心启动类</b>
+ * <b>智慧医疗信息平台 - 注册中心启动类</b>
  *
- * @author zyuan
- * @date 2021/12/29
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/14
  * @since 1.0.0
  */
 @EnableEurekaServer

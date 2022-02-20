@@ -16,9 +16,9 @@ import java.util.Map;
 /**
  * <b>项目基础框架 - 系统 Token 工具类</b>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/15
  * @since 1.0.0
  */
 public class TokenUtil {

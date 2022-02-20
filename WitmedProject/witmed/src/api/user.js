@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+// 异步登录函数
 export function login(data) {
   return request({
     url: 'http://localhost:11111/system/admin/admin/login',

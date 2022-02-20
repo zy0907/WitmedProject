@@ -3,9 +3,9 @@ package com.whackon.witmed.base.pojo.enums;
 /**
  * <b>项目基础框架 - 系统响应编码枚举信息</b>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/14
  * @since 1.0.0
  */
 public enum ResponseCodeEnum {

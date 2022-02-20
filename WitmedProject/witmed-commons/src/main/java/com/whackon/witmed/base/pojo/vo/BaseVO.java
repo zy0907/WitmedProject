@@ -15,9 +15,9 @@ import java.util.Date;
  *     <p>所有项目功能视图信息都必须继承于本系统基础视图信息</p>
  * </p>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/15
  * @since 1.0.0
  */
 @Data

@@ -18,14 +18,14 @@ import java.util.Date;
  *     <p>所有项目功能实体信息都必须继承于本系统基础实体信息</p>
  * </p>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/15
  * @since 1.0.0
  */
 @Data
 public class BaseEntity implements Serializable {
-	private static final long serialVersionUID = 3236307612993029344L;
+	private static final long serialVersionUID = 377806458505909427L;
 	private String status;                      // 系统状态：0-禁用，1-启用
 	@TableField(value = "createdBy")
 	private String createdBy;                   // 创建人

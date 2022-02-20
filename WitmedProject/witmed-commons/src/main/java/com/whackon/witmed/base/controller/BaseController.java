@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
  *     <b>所有项目功能控制层类都必须继承于本基础控制层类</b>
  * </p>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/14
  * @since 1.0.0
  */
 @Controller("baseController")

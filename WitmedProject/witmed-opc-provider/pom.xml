@@ -5,24 +5,24 @@
                                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>witmed-opc-provider</artifactId>
-  <!-- 设置项目打包方式为 jar -->
+  <!-- 配置项目打包方式：jar -->
   <packaging>jar</packaging>
 
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [BEGIN] -->
+  <!-- 配置项目父级依赖：Witmed Parent [BEGIN] -->
   <parent>
     <groupId>com.whackon.witmed</groupId>
     <artifactId>witmed-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <!-- 配置使用 Witmed Parent 作为项目父级依赖 [END] -->
+  <!-- 配置项目父级依赖：Witmed Parent [END] -->
 
   <dependencies>
-    <!-- 配置 Witmed Data Commons 依赖 [BEGIN] -->
+    <!-- 配置依赖：Witmed Data Common [BEGIN] -->
     <dependency>
       <groupId>com.whackon.witmed</groupId>
-      <artifactId>witmed-data-commons</artifactId>
+      <artifactId>witmed-data-common</artifactId>
       <version>${parent.version}</version>
     </dependency>
-    <!-- 配置 Witmed Data Commons 依赖 [END] -->
+    <!-- 配置依赖：Witmed Data Common [END] -->
   </dependencies>
 </project>

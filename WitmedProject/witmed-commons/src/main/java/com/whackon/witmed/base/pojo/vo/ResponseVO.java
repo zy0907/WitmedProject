@@ -15,9 +15,9 @@ import java.io.Serializable;
  *     <p>所有返回前端数据都必须以该系统响应视图信息返回</p>
  * </p>
  *
- * @author zyuan
- * @date 2022/1/18
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/14
  * @since 1.0.0
  */
 @Data

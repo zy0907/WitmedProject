@@ -8,11 +8,11 @@ import com.whackon.witmed.base.pojo.entity.BaseEntity;
 import lombok.Data;
 
 /**
- * <b>智慧医疗信息平台 - 系统功能 - 系统功能实体信息</b>
+ * <b>智慧医疗信息平台 - 系统功能 - 系统功能菜单实体信息</b>
  *
- * @author zyuan
- * @date 2022/1/19
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/15
  * @since 1.0.0
  */
 @Data
@@ -20,21 +20,22 @@ import lombok.Data;
 public class Menu extends BaseEntity {
 	private static final long serialVersionUID = 6494472229034048736L;
 	@TableId(type = IdType.AUTO)
+	@TableField("id")
 	private Long id;                        // 主键
-	@TableField(value = "上级菜单")
+	@TableField("parent")
 	private String parent;                  // 上级菜单
-	@TableField(value = "菜单文本")
+	@TableField("name")
 	private String name;                    // 菜单文本
-	@TableField(value = "角色编码")
+	@TableField("code")
 	private String code;                    // 角色编码
-	@TableField(value = "链接地址")
+	@TableField("path")
 	private String path;                    // 链接地址
-	@TableField(value = "菜单组件")
+	@TableField("component")
 	private String component;               // 菜单组件
-	@TableField(value = "菜单标题")
+	@TableField("title")
 	private String title;                   // 菜单标题
-	@TableField(value = "菜单图标")
+	@TableField("icon")
 	private String icon;                    // 菜单图标
-	@TableField(value = "排序")
-	private String sort;                    // 排序
+	@TableField("sort")
+	private Integer sort;                   // 排序
 }

@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * <b>智慧医疗信息平台 - 系统功能 - 系统用户角色 Vue 操作路由视图信息</b>
  *
- * @author zyuan
- * @date 2022/1/19
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/16
  * @since 1.0.0
  */
 @Data

@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.whackon.witmed.system.admin.dao.MenuDao">
 	<select id="findMenuListByRoleAndParent" parameterType="java.util.Map" resultMap="resultMap">
 		select
 			sm.id,
-			sm.parent,
 			sm.name,
 			sm.code,
 			sm.path,
@@ -18,28 +18,29 @@
 			sm.modifiedBy,
 			sm.modifiedTime
 		from
-			sys_menu sm left join sys_role_menu rm on sm.code=rm.menu
-		where
-			rm.role=#{role}
-			and
-			<if test="parent == null">
-				sm.parent is null
-			</if>
-			<if test="parent != null">
-				sm.parent=#{parent}
-			</if>
+			sys_menu sm left join sys_menu sp on sm.parent=sp.code
+			            join sys_role_menu srm on srm.menu=sm.code
+		<where>
+			<trim suffixOverrides="and">
+				<if test="role != null and role != ''">srm.role=#{role} and</if>
+				<if test="parent == null">sm.parent is null and</if>
+				<if test="parent != null">sm.parent=#{parent} and</if>
+				sm.status='1' and
+			</trim>
+		</where>
+		order by
+			sm.createdTime asc
 	</select>
-
+	
 	<resultMap id="resultMap" type="com.whackon.witmed.system.admin.pojo.entity.Menu">
 		<id property="id" javaType="java.lang.Long" column="id"/>
-		<result property="parent" javaType="java.lang.String" column="parent"/>
 		<result property="name" javaType="java.lang.String" column="name"/>
 		<result property="code" javaType="java.lang.String" column="code"/>
 		<result property="path" javaType="java.lang.String" column="path"/>
 		<result property="component" javaType="java.lang.String" column="component"/>
 		<result property="title" javaType="java.lang.String" column="title"/>
 		<result property="icon" javaType="java.lang.String" column="icon"/>
-		<result property="sort" javaType="java.lang.Long" column="sort"/>
+		<result property="sort" javaType="java.lang.Integer" column="sort"/>
 		<result property="status" javaType="java.lang.String" column="status"/>
 		<result property="createdBy" javaType="java.lang.String" column="createdBy"/>
 		<result property="createdTime" javaType="java.util.Date" column="createdTime"/>

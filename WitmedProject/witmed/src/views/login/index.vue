@@ -8,7 +8,7 @@
              label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Witmed 智慧医疗信息平台</h3>
+        <h3 class="title">智慧医疗信息平台</h3>
       </div>
 
       <el-form-item prop="cellphone">
@@ -46,8 +46,11 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
-
+      <el-button :loading="loading" type="primary"
+                 style="width:100%;margin-bottom:30px;"
+                 @click.native.prevent="handleLogin">
+        登录系统
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -56,32 +59,27 @@
 export default {
   name: 'Login',
   data() {
-    // 校验手机号码规则
-    // 如果在 JavaScript 中通过 const 所定义的变量，类似于 Java 的 public static final 类型的变量
-    // 也就是说 const 所定义的变量就是 JavaScript 中的常量
-    // let 定的 JavaScript 类似于 Java 定义的局部变量
-    // 原来使用 var 所定义的变量没有明确的作用域，因此在 ES6 中认为这种变量的定义范围是不明确，而且有可能过大。
-    // 无论是在 Java 中，还是 JavaScript 中变量定义的作用范围应当足够的小，这样能够保证会被回收机制即使的回收，
-    // 而不会造成空间的浪费。
+    // 校验登录手机号码
     const validateCellphone = (rule, value, callback) => {
-      // value 就是表单中输入的值
-      // 自己设定校验规则，设置手机号码的正则表达式
-      var cellphoneRegex = new RegExp('1[0-9]{10}$')
+      // 设置手机号码校验正则表达式
+      const cellphoneRegex = new RegExp('1[0-9]{10}')
       if (cellphoneRegex.test(value)) {
-        // 校验通过，用户所填写的手机号码正确
+        // 手机号码校验通过
         callback()
       } else {
         // 手机号码校验失败
-        callback(new Error('请您填写正确的登录手机号码！'))
+        callback(new Error('请填写正确的手机号码！'))
       }
     }
+    // 校验登录密码
     const validatePassword = (rule, value, callback) => {
-      // 设置密码校验正则表达式
-      var passwordRegex = new RegExp('[A-Za-z0-9]{6,}')
+      // 设置登录密码正则表达式
+      const passwordRegex = new RegExp('[A-Za-z0-9]{6,}')
       if (passwordRegex.test(value)) {
+        // 校验成功
         callback()
       } else {
-        callback(new Error('请您填写正确的登录密码，密码由字母、数字组成，至少六位！'))
+        callback(new Error('登录密码由大写字母、小写字母和数字组成，至少六位！'))
       }
     }
     return {

@@ -3,26 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                                 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>witmed-system-consumer</artifactId>
-  <!-- 配置项目打包方式：jar -->
-  <packaging>jar</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>witmed-system-consumer</artifactId>
+	<!-- 设置打包格式：jar -->
+	<packaging>jar</packaging>
 
-  <!-- 配置项目父级依赖：Witmed Parent [BEGIN] -->
-  <parent>
-    <groupId>com.whackon.witmed</groupId>
-    <artifactId>witmed-parent</artifactId>
-    <version>1.0.0</version>
-  </parent>
-  <!-- 配置项目父级依赖：Witmed Parent [END] -->
+	<!-- 配置项目父级依赖：Witmed Parent [BEGIN] -->
+	<parent>
+		<groupId>com.whackon.witmed</groupId>
+		<artifactId>witmed-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<!-- 配置项目父级依赖：Witmed Parent [End] -->
 
-  <dependencies>
-    <!-- 配置依赖：Witmed Commons [BEGIN] -->
-    <dependency>
-      <groupId>com.whackon.witmed</groupId>
-      <artifactId>witmed-commons</artifactId>
-      <version>${parent.version}</version>
-    </dependency>
-    <!-- 配置依赖：Witmed Commons [END] -->
-  </dependencies>
+	<dependencies>
+		<!-- 配置依赖：Witmed Common [BEGIN] -->
+		<dependency>
+			<groupId>com.whackon.witmed</groupId>
+			<artifactId>witmed-common</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+		<!-- 配置依赖：Witmed Common [END] -->
+	</dependencies>
 </project>

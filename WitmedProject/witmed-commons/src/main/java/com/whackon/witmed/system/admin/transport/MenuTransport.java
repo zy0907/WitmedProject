@@ -11,19 +11,20 @@ import java.util.List;
 /**
  * <b>智慧医疗信息平台 - 系统功能 - 系统功能菜单传输层接口</b>
  *
- * @author zyuan
- * @date 2022/1/19
+ * @author Arthur
  * @version 1.0.0
+ * @date 2022/2/17
  * @since 1.0.0
  */
 @FeignClient(name = "witmed-system-provider")
+//@RequestMapping("/system/admin/menu/trans")
 public interface MenuTransport {
 	/**
-	 * <b>根据角色信息获得该角色对应的操作路由列表</b>
+	 * <b>根据角色信息获得路由列表</b>
 	 * @param roleVO
 	 * @return
 	 * @throws Exception
 	 */
 	@PostMapping("/system/admin/menu/trans/routerlist")
-	List<RouterVO> getRouterVOListByRoleVO(@RequestBody RoleVO roleVO) throws Exception;
+	List<RouterVO> getRouterVOByRole(@RequestBody RoleVO roleVO) throws Exception;
 }

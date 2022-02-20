@@ -34,6 +34,7 @@ router.beforeEach(async(to, from, next) => {
           // get user info
           store.dispatch('user/getInfo').then(() => {
             router.options.routes = store.getters.routers
+            router.addRoutes(store.getters.routers)
             next({ ...to, replace: true })
           })
         } catch (error) {
