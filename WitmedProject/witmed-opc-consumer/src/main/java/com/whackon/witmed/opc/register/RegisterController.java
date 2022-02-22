@@ -3,11 +3,17 @@ package com.whackon.witmed.opc.register;
 import com.whackon.witmed.base.controller.BaseController;
 import com.whackon.witmed.base.pojo.vo.ResponseVO;
 import com.whackon.witmed.emr.clinic.transport.ClinicTransport;
+import com.whackon.witmed.emr.resume.pojo.vo.ResumeVO;
 import com.whackon.witmed.emr.resume.transport.ResumeTransport;
+import com.whackon.witmed.opc.dto.RegisterDto;
 import com.whackon.witmed.opc.register.pojo.vo.RegisterInfoVO;
+import com.whackon.witmed.opc.register.pojo.vo.RegisterRecordVO;
 import com.whackon.witmed.opc.register.transport.RegisterTransport;
+import com.whackon.witmed.opc.schedule.pojo.vo.DoctorScheduleVO;
 import com.whackon.witmed.patient.patient.pojo.vo.PatientVO;
 import com.whackon.witmed.patient.patient.transport.PatientTransport;
+import com.whackon.witmed.system.admin.pojo.vo.AdminVO;
+import com.whackon.witmed.system.hospital.pojo.vo.DepartmentVO;
 import com.whackon.witmed.system.hospital.transport.DepartmentTransport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -59,37 +65,44 @@ public class RegisterController extends BaseController {
 			// 未查询到该患者信息，那么生成该患者信息并且进行保存
 			patientVO = patientTransport.saveByIdInfo(registerInfoVO.getIdInfoVO());
 		}
-//		AdminVO doctorVO = null;
-//		// 判断此时患者是否指定所需要接诊的医生
-//		if (registerInfoVO.getDoctorId() == null) {
-//			// 如果未确定接诊医生，则根据所挂号科室自动匹配接诊医生
-//			doctorVO = registerTransport.matchDocForAuto(registerInfoVO.getDeptId());
-//		} else {
-//			// 此时已经选择了接诊医生，那么根据此时时间，判断是否该医生有号码，并且获得该医生具体信息
-//			doctorVO = registerTransport.matchDocForPatient(registerInfoVO.getDoctorId());
-//		}
-//		// 该医生是否还有号可以进行接诊
-//		if (doctorVO == null) {
-//			// 此时该医生今日的号已经全部挂完，因此无法继续接诊
-//			return ResponseVO.errorResponseVO("今日医生所挂号数量已满，无法接诊");
-//		}
-//		// 根据患者所挂号的科室信息获得该科室视图对象
-//		DepartmentVO departmentVO = departmentTransport.getById(registerInfoVO.getDeptId());
-//		// 保存本次患者就诊信息
-//		RegisterRecordVO saveVO = new RegisterRecordVO();
-//		saveVO.setEmrNo(patientVO.getEmrNo());
-//		saveVO.setPatientVO(patientVO);
-//		saveVO.setDoctorVO(doctorVO);
-//		saveVO.setDepartmentVO(departmentVO);
-//		RegisterRecordVO registerRecordVO = registerTransport.save(saveVO);
-//		// 完成医生匹配后，生成病历概要数据
-//		ResumeVO resumeVO = resumeTransport.saveByRegisterRecordVO(registerRecordVO);
-//		// 生成门诊病历数据
-//		ClinicVO clinicVO = clinicTransport.saveByRegisterRecordVO(registerRecordVO);
-//		// 将本次患者就诊号进行返回
-//		if (resumeVO != null && clinicVO != null) {
-//			return ResponseVO.successResponseVO("挂号成功");
-//		}
+		DoctorScheduleVO doctorScheduleVO = null;
+		// 判断此时患者是否指定所需要接诊的医生
+		if (registerInfoVO.getDoctorId() == null) {
+			// 如果未确定接诊医生，则根据所挂号科室自动匹配接诊医生
+			doctorScheduleVO = registerTransport.matchDocForAuto(registerInfoVO.getDeptId());
+		} else {
+			// 此时已经选择了接诊医生，那么根据此时时间，判断是否该医生有号码，并且获得该医生具体信息
+			doctorScheduleVO = registerTransport.matchDocForPatient(registerInfoVO.getDoctorId());
+		}
+		// 该医生是否还有号可以进行接诊
+		if (doctorScheduleVO == null) {
+			// 此时该医生今日的号已经全部挂完，因此无法继续接诊
+			return ResponseVO.errorResponseVO("今日医生所挂号数量已满，无法接诊");
+		}
+		// 创建医生视图信息
+		AdminVO doctorVO = new AdminVO();
+		doctorVO.setId(doctorScheduleVO.getDoctor());
+		// 根据患者所挂号的科室信息获得该科室视图对象
+		DepartmentVO departmentVO = departmentTransport.getById(registerInfoVO.getDeptId());
+		if (departmentVO != null) {
+			// 保存本次患者就诊信息
+			RegisterRecordVO saveVO = new RegisterRecordVO();
+			saveVO.setEmrNo(patientVO.getEmrNo());
+			saveVO.setPatientVO(patientVO);
+			saveVO.setDoctorVO(doctorVO);
+			saveVO.setDepartmentVO(departmentVO);
+			// 创建数据传输对象
+			RegisterDto registerDto = new RegisterDto(saveVO, doctorScheduleVO);
+			RegisterRecordVO registerRecordVO = registerTransport.save(registerDto);
+			// 完成医生匹配后，生成病历概要数据
+			ResumeVO resumeVO = resumeTransport.saveByRegisterRecordVO(registerRecordVO);
+			// 生成门诊病历数据
+//			ClinicVO clinicVO = clinicTransport.saveByRegisterRecordVO(registerRecordVO);
+			// 将本次患者就诊号进行返回
+//			if (resumeVO != null && clinicVO != null) {
+//				return ResponseVO.successResponseVO("挂号成功");
+//			}
+		}
 		return ResponseVO.errorResponseVO("挂号失败");
 	}
 }
